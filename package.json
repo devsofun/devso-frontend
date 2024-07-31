@@ -1,0 +1,28 @@
+{
+  "name": "vite-vue-typescript-starter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "vite --host",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.19",
+    "axios": "1.7.2",
+    "element-plus": "^2.7.8",
+    "postcss": "^8.4.40",
+    "tailwindcss": "^3.4.7",
+    "vue": "^3.4.15",
+    "vue-router": "^4.1.6",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.3",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.12",
+    "vite-plugin-vue-devtools": "^7.2.1",
+    "vue-tsc": "^2.0.21"
+  }
+}
