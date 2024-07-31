@@ -1,13 +1,15 @@
 <template>
-  <router-view></router-view>
+  <Layout />
 </template>
 
-<script>
-export default {
-  name: 'App'
-};
-</script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+import Layout from './components/Layout.vue';
 
-<style>
-/* Your global styles here */
-</style>
+export default defineComponent({
+  name: 'App',
+  components: {
+    Layout,
+  },
+});
+</script>

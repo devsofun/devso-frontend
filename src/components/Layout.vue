@@ -1,0 +1,26 @@
+<template>
+  <el-container class="h-screen w-screen flex flex-col">
+    <div class="flex flex-grow">
+      <router-view class="min-h-full min-w-full"></router-view>
+    </div>
+    <div class="footer h-15">
+      <div class="text-center text-gray-500">
+        Powered by DevSo.Fun
+      </div>
+    </div>
+  </el-container>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+    name: 'Layout',
+});
+</script>
+
+<style scoped>
+.footer {
+    @apply text-center p-4 bg-gray-100 border-t border-gray-200;
+}
+</style>

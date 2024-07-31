@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center justify-center h-screen bg-gray-100 space-y-5">
+  <div class="flex flex-col items-center justify-center bg-gray-100 space-y-5"> 
     <div class="flex items-center">
       <div class="inline-block text-5xl font-bold rainbow leading-none">
         DevSo.Fun
@@ -10,6 +10,7 @@
         class="w-80" 
         v-model="query"
         placeholder="请输入搜索关键词"
+        @keyup.enter.native="performSearch"
       />
       <el-button
         type="primary"
