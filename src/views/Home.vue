@@ -5,36 +5,12 @@
         DevSo.Fun
       </div>
     </div>
-    <div class="flex items-center gap-x-1">
-      <el-input
-        class="w-80" 
-        v-model="query"
-        placeholder="请输入搜索关键词"
-        @keyup.enter.native="performSearch"
-      />
-      <el-button
-        type="primary"
-        @click="performSearch"
-      >
-        搜索
-      </el-button>
-    </div>
+    <SearchBox />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { ElMessage } from 'element-plus';
-
-const query = ref('');
-
-function performSearch() {
-  if (query.value !== '') {
-    ElMessage.success(`搜索: ${query.value}`);
-  } else {
-    ElMessage.warning('请输入搜索关键词');
-  }
-}
+import SearchBox from '../components/SearchBox.vue';
 </script>
 
 <style scoped>
