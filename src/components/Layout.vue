@@ -21,6 +21,6 @@ defineComponent({
 
 <style scoped>
 .footer {
-    @apply text-center p-4 bg-gray-100 border-t border-gray-200;
+  @apply text-center p-4 bg-gray-100 border-t border-gray-200;
 }
 </style>

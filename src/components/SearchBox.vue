@@ -8,19 +8,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { ElMessage } from 'element-plus';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
 const router = useRouter();
+const route = useRoute();
 
-const props = withDefaults(defineProps<{
-  query?: string;
-}>(), {
-  query: ''
-}); // !important
+const internalQuery = ref(route.query.query as string || '');
 
-const internalQuery = ref(props.query);
+watch(() => route.query.query, (newQuery) => {
+  internalQuery.value = newQuery as string || '';
+});
 
 function performSearch() {
     if (internalQuery.value !== '') {
