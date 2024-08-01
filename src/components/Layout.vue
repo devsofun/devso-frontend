@@ -11,11 +11,11 @@
   </el-container>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { defineComponent } from 'vue';
 
-export default defineComponent({
-    name: 'Layout',
+defineComponent({
+  name: 'Layout',
 });
 </script>
 

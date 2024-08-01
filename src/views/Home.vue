@@ -22,17 +22,19 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import { ElMessage } from 'element-plus';
 
 const query = ref('');
 
-const performSearch = () => {
-  // 这里你可以处理搜索逻辑
-  console.log('搜索: ', query.value);
-  ElMessage.success('搜索: ' + query.value);
-};
+function performSearch() {
+  if (query.value !== '') {
+    ElMessage.success(`搜索: ${query.value}`);
+  } else {
+    ElMessage.warning('请输入搜索关键词');
+  }
+}
 </script>
 
 <style scoped>
