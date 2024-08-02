@@ -1,25 +1,25 @@
 <template>
-<div class="bg-gray-100 w-full min-h-screen flex flex-col items-center py-8">
-    <div class="fixed top-0 left-0 w-full bg-gray-100 shadow-md z-50 py-4">
-        <div class="flex justify-start items-center gap-4 w-full max-w-4xl mx-auto px-4">
-            <div class="flex-shrink title rainbow text-2xl font-extrabold select-none">
-                <a href="/">DevSo.Fun</a>
-            </div>
-            <SearchBox class="flex-grow" v-model="query" @search="fetchResults" />
+  <div class="bg-gray-100 w-full min-h-screen flex flex-col items-center">
+    <header class="sticky top-0 w-full bg-gray-100 shadow-md z-50 py-4">
+      <div class="flex justify-start items-center gap-4 max-w-4xl mx-auto px-4 w-full">
+        <div class="flex-shrink title rainbow text-2xl font-extrabold select-none">
+          <a href="/">DevSo.Fun</a>
         </div>
-    </div>
-    <!-- TODO: 屏幕分左右栏 -->
-    <div class="flex flex-col items-center max-w-4xl mt-12 px-4" v-loading="loading">
-        <div v-for="(result, index) in results" :key="index" 
-            class="mb-6 p-6 bg-white rounded-xl shadow-lg max-w-full
-                  transition-transform duration-300 hover:shadow-xl hover:scale-105">
-            <h2 class="text-xl font-semibold text-blue-700">
-                <a :href="result.link" target="_blank" class="hover-underline-animation">{{ result.title }}</a>
-            </h2>
-            <p class="text-gray-800 mt-2 break-all">{{ result.content + "..." }}</p>
-            <p class="text-green-600 mt-2 break-all">{{ result.link }}</p>
-        </div>
-    </div>
+        <SearchBox class="flex-grow" v-model="query" @search="fetchResults" />
+      </div>
+    </header>
+
+    <main class="flex flex-col items-center max-w-4xl py-4 px-4" v-loading="loading">
+      <div v-for="(result, index) in results" :key="index" 
+        class="mb-6 p-6 bg-white rounded-xl shadow-lg min-w-full 
+        transition-transform duration-300 hover:shadow-xl hover:scale-105">
+        <h2 class="text-xl font-semibold text-blue-700">
+          <a :href="result.link" target="_blank" class="hover-underline-animation">{{ result.title }}</a>
+        </h2>
+        <p class="text-gray-800 mt-2 break-all">{{ result.content + "..." }}</p>
+        <p class="text-green-600 mt-2 break-all">{{ result.link }}</p>
+      </div>
+    </main>
   </div>
 </template>
 
