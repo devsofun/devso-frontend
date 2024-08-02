@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-center justify-center bg-gray-100 space-y-5"> 
     <div class="flex">
-      <div class="inline-block text-5xl font-bold rainbow leading-none">
+      <div class="inline-block text-5xl font-bold rainbow select-none">
         DevSo.Fun
       </div>
     </div>

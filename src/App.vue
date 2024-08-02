@@ -9,9 +9,11 @@
       </div>
     </div>
   </el-container>
+  <SettingsPanel />
 </template>
 
 <script setup lang="ts">
+import SettingsPanel from './components/SettingsPanel.vue'
 </script>
 
 <style scoped>
