@@ -1,16 +1,19 @@
 <template>
-  <div class="results-page">
-    <div class="header">
-      <div class="title rainbow">DevSo.Fun</div>
-      <SearchBox v-model="query" @search="fetchResults" />
+  <div class="bg-gray-100 w-full min-h-screen flex flex-col items-center py-8">
+    <div class="flex justify-start items-center gap-4 w-full max-w-4xl">
+      <div class="title rainbow text-2xl font-extrabold">DevSo.Fun</div>
+      <SearchBox v-model="query" @search="fetchResults" class="flex-grow" />
     </div>
-    <div class="results-container" v-loading="loading">
-      <div v-for="(result, index) in results" :key="index" class="result-item">
-        <h2 class="result-title">
-          <a :href="result.link" target="_blank">{{ result.title }}</a>
+    <!-- TODO: 屏幕分左右栏 -->
+    <div class="flex flex-col items-center max-w-4xl mt-8 px-4" v-loading="loading">
+      <div v-for="(result, index) in results" :key="index" 
+        class="mb-6 p-6 bg-white rounded-xl shadow-lg max-w-full
+              transition-transform duration-300 hover:shadow-xl hover:scale-105">
+        <h2 class="text-xl font-semibold text-blue-700">
+          <a :href="result.link" target="_blank" class="hover-underline-animation">{{ result.title }}</a>
         </h2>
-        <p class="result-snippet">{{ result.content }}</p>
-        <div class="result-url">{{ result.link }}</div>
+        <p class="text-gray-800 mt-2 break-all">{{ result.content + "..." }}</p>
+        <p class="text-green-600 mt-2 break-all">{{ result.link }}</p>
       </div>
     </div>
   </div>
@@ -50,67 +53,42 @@ const fetchResults = async () => {
 
 watch(() => route.query.query, (newQuery) => {
   query.value = newQuery as string;
-  fetchResults();
+  fetchResults(); // 更新搜索结果
 });
 
 fetchResults();
 </script>
 
 <style scoped>
-.results-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #f3f4f6;
-  padding: 1rem;
-}
-
-.results-page.loading {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-.header {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 0.25rem;
-  width: 100%;
-}
-
-.title {
-  font-weight: bold;
-  font-size: 1.25rem;
-  line-height: 1;
-}
-
 .rainbow {
   background: linear-gradient(to right, #60a5fa, #34d399, #8b5cf6);
   background-clip: text;
   color: transparent;
 }
 
-.results-container {
+.hover-underline-animation {
+  display: inline-block;
+  position: relative;
+  color: #3490dc;
+  text-decoration: none;
+}
+
+.hover-underline-animation::after {
+  content: '';
+  position: absolute;
   width: 100%;
-  max-width: 4xl;
-  margin-top: 1rem;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #3490dc;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
 }
 
-.result-item {
-  margin-bottom: 1.5rem;
+.hover-underline-animation:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
 
-.result-title {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: #2563eb;
-}
-
-.result-snippet {
-  color: #374151;
-}
-
-.result-url {
-  color: #059669;
-}
 </style>

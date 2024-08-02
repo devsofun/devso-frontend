@@ -1,7 +1,11 @@
 <template>
     <div class="flex gap-x-1">
-        <el-input class="w-80" v-model="internalQuery" placeholder="请输入搜索关键词" @keyup.enter.native="performSearch" />
-        <el-button type="primary" @click="performSearch">
+        <el-input 
+            class="flex-grow max-w-full"
+            v-model="internalQuery"
+            placeholder="请输入搜索关键词"
+            @keyup.enter.native="performSearch" />
+        <el-button class="flex" type="primary" @click="performSearch">
             搜索
         </el-button>
     </div>

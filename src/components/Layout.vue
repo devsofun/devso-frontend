@@ -1,5 +1,5 @@
 <template>
-  <el-container class="h-screen w-screen flex flex-col">
+  <el-container class="h-screen max-w-screen flex flex-col overflow-x-hidden">
     <div class="flex flex-grow">
       <router-view class="min-h-full min-w-full"></router-view>
     </div>
