@@ -1,39 +1,158 @@
-<template>
-  <div class="bg-gray-100 w-full min-h-screen flex flex-col items-center">
-    <header class="sticky top-0 w-full bg-gray-100 shadow-md z-50 py-4">
-      <div class="flex justify-start items-center gap-4 max-w-4xl mx-auto px-4 w-full">
-        <div class="flex-shrink title rainbow text-2xl font-extrabold select-none">
-          <a href="/">DevSo.Fun</a>
-        </div>
-        <SearchBox class="flex-grow" v-model="query" @search="fetchResults" />
-      </div>
-    </header>
+<!-- <template>
+  <div class="bg-gray-100 w-full min-h-screen flex flex-col">
+    <div class="common-layout">
+      <el-container>
+        <el-page-header>
+          <template #content>
+            <span class="text-large font-600 mr-3"> Title </span>
+          </template>
+        </el-page-header>
+        <el-container>
+          <el-aside width="200px">Aside</el-aside>
+          <main
+            class="flex flex-col items-center max-w-4xl py-4 px-4 flex-grow"
+            v-loading="loading"
+          >
+            <div
+              v-for="(result, index) in results"
+              :key="index"
+              class="mb-6 p-6 bg-white rounded-xl shadow-lg min-w-full transition-transform duration-300 hover:shadow-xl hover:scale-105"
+            >
+              <h2 class="text-xl font-semibold text-blue-700">
+                <a
+                  :href="result.link"
+                  target="_blank"
+                  class="hover-underline-animation"
+                  >{{ result.title }}</a
+                >
+              </h2>
+              <p class="text-gray-800 mt-2 break-all">
+                {{ result.content + "..." }}
+              </p>
+              <p class="text-green-600 mt-2 break-all">{{ result.link }}</p>
+            </div>
+          </main>
+          <el-footer>
+            <SearchBox
+              class="flex-grow"
+              v-model="query"
+              @search="fetchResults"
+            />
+          </el-footer>
+        </el-container>
+      </el-container>
+    </div>
+  </div>
+</template> -->
 
-    <main class="flex flex-col items-center max-w-4xl py-4 px-4" v-loading="loading">
-      <div v-for="(result, index) in results" :key="index" 
-        class="mb-6 p-6 bg-white rounded-xl shadow-lg min-w-full 
-        transition-transform duration-300 hover:shadow-xl hover:scale-105">
-        <h2 class="text-xl font-semibold text-blue-700">
-          <a :href="result.link" target="_blank" class="hover-underline-animation">{{ result.title }}</a>
-        </h2>
-        <p class="text-gray-800 mt-2 break-all">{{ result.content + "..." }}</p>
-        <p class="text-green-600 mt-2 break-all">{{ result.link }}</p>
-      </div>
-    </main>
+<template>
+  <div class="flex flex-col min-h-full">
+    <el-row class="tac">
+      <el-col :span="5">
+        <div
+          style="
+            position: fixed;
+            max-width: inherit;
+            left: 0;
+            right: 0;
+            height: 100vh;
+          "
+        >
+          <el-menu
+            default-active="2"
+            class="el-menu-vertical-demo"
+            style="height: 100%"
+            @open="handleOpen"
+            @close="handleClose"
+          >
+            <el-menu-item index="2">
+              <el-icon><search /></el-icon>
+              <span>DevSo.Fun</span>
+            </el-menu-item>
+            <el-sub-menu index="1" default-opened>
+              <template #title>
+                <el-icon><chat-dot-round /></el-icon>
+                <span>历史记录</span>
+              </template>
+              <el-menu-item-group title="Group One">
+                <el-menu-item index="1-1">item one</el-menu-item>
+                <el-menu-item index="1-2">item two</el-menu-item>
+              </el-menu-item-group>
+              <el-menu-item-group title="Group Two">
+                <el-menu-item index="1-3">item three</el-menu-item>
+              </el-menu-item-group>
+              <el-sub-menu index="1-4">
+                <template #title>item four</template>
+                <el-menu-item index="1-4-1">item one</el-menu-item>
+              </el-sub-menu>
+            </el-sub-menu>
+
+            <el-menu-item index="3" disabled>
+              <el-icon><Setting /></el-icon>
+              <span>设置</span>
+            </el-menu-item>
+          </el-menu>
+        </div>
+      </el-col>
+      <el-col :span="14">
+        <div class="flex flex-col">
+          <div class="flex">
+            <main
+              class="flex-1 items-center max-w-4xl py-4 px-4"
+              v-loading="loading"
+            >
+              <div
+                v-for="(result, index) in results"
+                :key="index"
+                class="mb-6 p-6 bg-white rounded-xl shadow-lg min-w-full transition-transform duration-300 hover:shadow-xl hover:scale-105"
+              >
+                <h2 class="text-xl font-semibold text-blue-700">
+                  <a
+                    :href="result.link"
+                    target="_blank"
+                    class="hover-underline-animation"
+                    >{{ result.title }}</a
+                  >
+                </h2>
+                <p class="text-gray-800 mt-2 break-all">
+                  {{ result.content + "..." }}
+                </p>
+                <p class="text-green-600 mt-2 break-all">{{ result.link }}</p>
+              </div>
+            </main>
+          </div>
+            <div class="fixed inset-x-0 bottom-10" style="width: 50vw; transform: translateX(50%)">
+            <SearchBox
+              class="flex-grow bottom-20 mx-4"
+              v-model="query"
+              @search="fetchResults"
+            />
+          </div>
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
-import { ElMessage } from 'element-plus';
-import axios from 'axios';
-import SearchBox from '../components/SearchBox.vue';
+import { ref, watch } from "vue";
+import { useRoute } from "vue-router";
+import { ElMessage } from "element-plus";
+import axios from "axios";
+import SearchBox from "../components/SearchBox.vue";
 
 const route = useRoute();
-const query = ref(route.query.query as string || '');
+const query = ref((route.query.query as string) || "");
 const results = ref<SearchResult[]>([]);
 const loading = ref(false);
+
+import { Search, Setting, ChatDotRound } from "@element-plus/icons-vue";
+const handleOpen = (key: string, keyPath: string[]) => {
+  console.log(key, keyPath);
+};
+const handleClose = (key: string, keyPath: string[]) => {
+  console.log(key, keyPath);
+};
 
 interface SearchResult {
   content: string;
@@ -41,13 +160,19 @@ interface SearchResult {
   title: string;
 }
 
+const goBack = () => {
+  console.log("go back");
+};
+
 const fetchResults = async () => {
   if (!query.value) return;
   loading.value = true;
   try {
-    const response = await axios.get<SearchResult[]>(`https://api.devso.fun/search?q=${query.value}`);
+    const response = await axios.get<SearchResult[]>(
+      `https://api.devso.fun/search?q=${query.value}`
+    );
     results.value = response.data;
-    ElMessage.success('搜索结果更新');
+    ElMessage.success("搜索结果更新");
   } catch (error) {
     ElMessage.error(`错误`);
   } finally {
@@ -55,10 +180,13 @@ const fetchResults = async () => {
   }
 };
 
-watch(() => route.query.query, (newQuery) => {
-  query.value = newQuery as string;
-  fetchResults(); // 更新搜索结果
-});
+watch(
+  () => route.query.query,
+  (newQuery) => {
+    query.value = newQuery as string;
+    fetchResults(); // 更新搜索结果
+  }
+);
 
 fetchResults();
 </script>
@@ -78,7 +206,7 @@ fetchResults();
 }
 
 .hover-underline-animation::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   transform: scaleX(0);
@@ -94,5 +222,4 @@ fetchResults();
   transform: scaleX(1);
   transform-origin: bottom left;
 }
-
 </style>

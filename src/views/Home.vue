@@ -1,6 +1,7 @@
 <template>
   <div class="flex flex-col items-center justify-center bg-gray-100 space-y-5"> 
     <div class="flex">
+      <img src="https://www.devso.fun/favicon.ico" alt="Logo" class="h-10 w-10 mr-2 self-center" />
       <div class="inline-block text-5xl font-bold rainbow select-none">
         DevSo.Fun
       </div>
